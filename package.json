@@ -20,14 +20,14 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
-  },
+},
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
   },
-  "homepage": "https://BowonLee.github.io/webviewTest",
+  "homepage": "https://BowonLee.github.io/webviewTest/",
   "browserslist": {
     "production": [
       ">0.2%",
