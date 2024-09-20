@@ -14,14 +14,21 @@ const answerNumbers: string[] = ["①", "②", "③", "④", "⑤"];
 
 const MathProblemDisplay: React.FC<MathProblemProps> = ({ problem, highlights, answers }) => {
   const [isHighlighted, setIsHighlighted] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const answerNumberRefs = useRef<(HTMLSpanElement | null)[]>([]); // 숫자에 대한 참조 배열 생성
 
   useEffect(() => {
     if (answers) {
       const rects = answerNumberRefs.current.map(ref => ref?.getBoundingClientRect());
+    //   const screen = 
       console.log(rects); // 숫자의 좌표 정보를 로그에 출력\
+      const webviewSize = {clientHeight : containerRef.current?.clientHeight, scrollHeight : containerRef.current?.scrollHeight};
+      console.log(webviewSize);
+      console.log(containerRef.current?.offsetHeight);
       if(window.flutter_inappwebview) {
         window.flutter_inappwebview.callHandler('reactToFlutter', JSON.stringify(rects));
+        window.flutter_inappwebview.callHandler('webviewSize', JSON.stringify(webviewSize));
+        
       }
     }
   }, [answers]); // answers가 변경될 때마다 실행
@@ -58,8 +65,9 @@ const MathProblemDisplay: React.FC<MathProblemProps> = ({ problem, highlights, a
   };
 
   return (
-    <div className="math-problem text-lg leading-relaxed ">
+    <div ref={containerRef} className="math-problem text-lg leading-relaxed ">
       <div className="mb-4">{renderMathContent(problem)}</div>
+      <div style={{height:"1000px", backgroundColor: "violet"}}></div>
       {answers && (
         <div className="mt-4 w-full">
           <div className="grid grid-cols-3 gap-4" style={{padding:"20px"}}>

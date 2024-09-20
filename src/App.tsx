@@ -53,7 +53,7 @@ function App() {
   
 
   return (
-    <div className="min-h-screen p-8 pb-20 bg-gray-100 text-black">
+    <div className="min-h-screen p-8 pb-20 bg-gray-100 text-black" style={{backgroundColor: 'beige'}}>
       <main className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-8 text-center">Math Problems</h1>
         <div className="bg-white shadow-md rounded-lg p-6">
@@ -69,6 +69,7 @@ function App() {
           ))}
         </div>
       </main>
+
     </div>
   );
 }
