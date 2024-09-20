@@ -14,12 +14,34 @@ const MyComponent = () => {
         width: rect.width,
         height: rect.height,
       });
+
+      // window.addEventListener("flutterInAppWebViewPlatformReady", function (event) {
+      //    window.flutter_inappwebview.callHandler('reactToFlutter', JSON.stringify(rect.toJSON()));
+      // });
+
+      const buttonOffset = {top : rect.top, lenft: rect.left, right: rect.right, bottom: rect.bottom, width: rect.width, height: rect.height};
+    if (window.flutter_inappwebview) {
+        window.flutter_inappwebview.callHandler('reactToFlutter', JSON.stringify(buttonOffset));
+      }
     } 
+
+
   }, []); // 컴포넌트가 처음 렌더링될 때 실행
 
   return (
     <div>
-      <div ref={myRef} style={{ top: 100, left: 100, width: '100px', height: '100px', backgroundColor: 'lightblue' }}>
+      <div
+        ref={myRef}
+        style={{
+          width: '100px',
+          height: '100px',
+          backgroundColor: 'lightblue',
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)', // 화면 중앙으로 이동
+        }}
+      >
         대상 컴포넌트
       </div>
       <p>좌표 정보:</p>
@@ -31,6 +53,7 @@ const MyComponent = () => {
       </ul>
     </div>
   );
+
 };
 
 export default MyComponent;
